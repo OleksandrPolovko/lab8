@@ -62,7 +62,38 @@ namespace Lab8
                 Chart chart = factory.CreateChart();
                 chart.Draw();
             }
-        
+        static void Task3()
+        {
+            // Користувач вводить тип продукту
+            Console.WriteLine("Enter the type of product (Smartphone/Laptop):");
+            string productType = Console.ReadLine();
+
+            // Створення відповідної фабрики
+            TechProductFactory factory;
+            switch (productType.ToLower())
+            {
+                case "smartphone":
+                    factory = new SmartphoneFactory();
+                    break;
+                case "laptop":
+                    factory = new LaptopFactory();
+                    break;
+                default:
+                    Console.WriteLine("Invalid product type");
+                    return;
+            }
+
+            // Створення та відображення технологічного продукту
+            Screen screen = factory.CreateScreen();
+            Processor processor = factory.CreateProcessor();
+            Camera camera = factory.CreateCamera();
+
+            Console.WriteLine("\nAssembling and Displaying the Product:");
+            screen.Display();
+            processor.Process();
+            camera.Capture();
+        }
+
         private static void Main(string[] args)
         {
             //Task1();
