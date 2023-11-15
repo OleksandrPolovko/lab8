@@ -93,10 +93,71 @@ namespace Lab8
             processor.Process();
             camera.Capture();
         }
+        static void Task4()
+        {
+            // Створення шаблонів даних
+            var csvTemplate = new CsvDataTemplate { CsvFormat = "CSV Format" };
+            var xmlTemplate = new XmlDataTemplate { XmlFormat = "XML Format" };
+
+            // Створення адаптерів
+            var csvAdapter = new CsvDataAdapter(csvTemplate);
+            var xmlAdapter = new XmlDataAdapter(xmlTemplate);
+
+            // Користувач вводить формат вихідних та цільових даних
+            Console.WriteLine("Enter source data format (CSV/XML):");
+            string sourceFormat = Console.ReadLine().ToLower();
+
+            Console.WriteLine("Enter target data format (CSV/XML):");
+            string targetFormat = Console.ReadLine().ToLower();
+
+            // Вибір відповідних адаптерів
+            IDataTemplate sourceTemplate, targetTemplate;
+            IDataAdapter sourceAdapter, targetAdapter;
+
+            if (sourceFormat == "csv")
+            {
+                sourceTemplate = csvTemplate;
+                sourceAdapter = csvAdapter;
+            }
+            else if (sourceFormat == "xml")
+            {
+                sourceTemplate = xmlTemplate;
+                sourceAdapter = xmlAdapter;
+            }
+            else
+            {
+                Console.WriteLine("Invalid source data format");
+                return;
+            }
+
+            if (targetFormat == "csv")
+            {
+                targetTemplate = csvTemplate;
+                targetAdapter = csvAdapter;
+            }
+            else if (targetFormat == "xml")
+            {
+                targetTemplate = xmlTemplate;
+                targetAdapter = xmlAdapter;
+            }
+            else
+            {
+                Console.WriteLine("Invalid target data format");
+                return;
+            }
+
+            // Клонування шаблонів для даних
+            IDataTemplate clonedSourceTemplate = sourceTemplate.Clone();
+            IDataTemplate clonedTargetTemplate = targetTemplate.Clone();
+
+            // Симуляція імпорту та експорту даних
+            sourceAdapter.ImportData("Source Data");
+            targetAdapter.ExportData();
+        }
 
         private static void Main(string[] args)
         {
-            //Task1();
+            Task1();
             //Task2();
             //Task3();
             //Task4();
